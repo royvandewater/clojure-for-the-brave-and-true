@@ -7,10 +7,13 @@
 
 (defn create-spy
   "Create a new spy function"
-  []
-  (let [n (atom 0)]
-    (with-meta
-      (fn [& _]
-        (swap! n inc)
-        nil)
-      {:called? (fn [] (> @n 0))})))
+  ([]
+   (create-spy #(constantly nil)))
+
+  ([f]
+   (let [n (atom 0)]
+     (with-meta
+       (fn [& args]
+         (swap! n inc)
+         (apply f args))
+       {:called? (fn [] (> @n 0))}))))
