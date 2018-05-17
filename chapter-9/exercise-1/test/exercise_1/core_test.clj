@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [exercise-1.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest search-test
+  (testing "when called with 'foo'."
+    (is (not (nil? (search "foo"))))))
