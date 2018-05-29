@@ -1,0 +1,22 @@
+description: "Install lein dependencies from a subfolder (with caching)"
+parameters:
+  working_directory:
+    description: "directory in which a project.clj is located"
+    default: "."
+    type: "string"
+steps:
+  # Download and cache dependencies
+  - restore_cache:
+      keys:
+      - v1-dependencies-{{ checksum "<< parameters.working_directory >>/project.clj" }}
+      # fallback to using the latest cache if no exact match is found
+      - v1-dependencies-
+
+  - run:
+      command: lein deps
+      working_directory: "<< parameters.working_directory >>"
+
+  - save_cache:
+      paths:
+        - ~/.m2
+      key: v1-dependencies-{{ checksum "<< parameters.working_directory >>/project.clj" }}

@@ -1,0 +1,10 @@
+description: "Run lein test from a subfolder"
+parameters:
+  working_directory:
+    description: "directory in which a project.clj is located"
+    default: "."
+    type: "string"
+steps:
+  - run:
+      command: lein test
+      working_directory: "<< parameters.working_directory >>"
