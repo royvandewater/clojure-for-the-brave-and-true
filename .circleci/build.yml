@@ -8,17 +8,17 @@ workflows:
   build-chapter-8-exercise-1:
     jobs:
       - brave/continuously_integrate:
-          name: "chapter-8/exercise-1"
+          name: "chapter-8-exercise-1"
           working_directory: "chapter-8/exercise-1"
 
   build-chapter-8-exercise-2:
     jobs:
       - brave/continuously_integrate:
-          name: "chapter-8/exercise-2"
+          name: "chapter-8-exercise-2"
           working_directory: "chapter-8/exercise-2"
 
   build-chapter-8-exercise-3:
     jobs:
       - brave/continuously_integrate:
-          name: "chapter-8/exercise-3"
+          name: "chapter-8-exercise-3"
           working_directory: "chapter-8/exercise-3"
