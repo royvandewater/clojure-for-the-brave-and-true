@@ -3,7 +3,13 @@ parameters:
     description: "directory in which a project.clj is located"
     default: "."
     type: "string"
-executor: brave/lein
+docker:
+  - image: circleci/clojure:lein-2.8.1
+working_directory: ~/repo
+environment:
+  LEIN_ROOT: "true"
+  # Customize the JVM maximum heap limit
+  JVM_OPTS: -Xmx3200m
 steps:
   - checkout
   - brave/dependencies:

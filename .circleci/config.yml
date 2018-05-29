@@ -1,24 +1,83 @@
-# Clojure CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-clojure/ for more details
-#
 version: 2
 workflows:
   version: 2
   build-chapter-8-exercise-1:
     jobs:
-      - brave/continuously_integrate:
-          name: "chapter-8/exercise-1"
-          working_directory: "chapter-8/exercise-1"
-
+    - chapter-8/exercise-1
   build-chapter-8-exercise-2:
     jobs:
-      - brave/continuously_integrate:
-          name: "chapter-8/exercise-2"
-          working_directory: "chapter-8/exercise-2"
-
+    - chapter-8/exercise-2
   build-chapter-8-exercise-3:
     jobs:
-      - brave/continuously_integrate:
-          name: "chapter-8/exercise-3"
-          working_directory: "chapter-8/exercise-3"
+    - chapter-8/exercise-3
+jobs:
+  exercise-1:
+    docker:
+    - image: circleci/clojure:lein-2.8.1
+    working_directory: ~/repo
+    environment:
+      LEIN_ROOT: 'true'
+      JVM_OPTS: -Xmx3200m
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "chapter-8/exercise-1/project.clj" }}
+        - v1-dependencies-
+    - run:
+        command: lein deps
+        working_directory: chapter-8/exercise-1
+    - save_cache:
+        paths:
+        - ~/.m2
+        key: v1-dependencies-{{ checksum "chapter-8/exercise-1/project.clj" }}
+    - run:
+        command: lein test
+        working_directory: chapter-8/exercise-1
+  exercise-2:
+    docker:
+    - image: circleci/clojure:lein-2.8.1
+    working_directory: ~/repo
+    environment:
+      LEIN_ROOT: 'true'
+      JVM_OPTS: -Xmx3200m
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "chapter-8/exercise-2/project.clj" }}
+        - v1-dependencies-
+    - run:
+        command: lein deps
+        working_directory: chapter-8/exercise-2
+    - save_cache:
+        paths:
+        - ~/.m2
+        key: v1-dependencies-{{ checksum "chapter-8/exercise-2/project.clj" }}
+    - run:
+        command: lein test
+        working_directory: chapter-8/exercise-2
+  exercise-3:
+    docker:
+    - image: circleci/clojure:lein-2.8.1
+    working_directory: ~/repo
+    environment:
+      LEIN_ROOT: 'true'
+      JVM_OPTS: -Xmx3200m
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "chapter-8/exercise-3/project.clj" }}
+        - v1-dependencies-
+    - run:
+        command: lein deps
+        working_directory: chapter-8/exercise-3
+    - save_cache:
+        paths:
+        - ~/.m2
+        key: v1-dependencies-{{ checksum "chapter-8/exercise-3/project.clj" }}
+    - run:
+        command: lein test
+        working_directory: chapter-8/exercise-3
+
