@@ -14,7 +14,7 @@ steps:
 
   - run:
       command: lein deps
-      working_directory: "<< parameters.working_directory >>"
+      working_directory: << parameters.working_directory >>
 
   - save_cache:
       paths:

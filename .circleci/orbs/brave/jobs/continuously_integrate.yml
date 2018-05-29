@@ -15,6 +15,6 @@ environment:
 steps:
   - checkout
   - brave/dependencies:
-      working_directory: "<< parameters/working_directory >>"
+      working_directory: << parameters.working_directory >>
   - brave/test:
-      working_directory: "<< parameters/working_directory >>"
+      working_directory: << parameters.working_directory >>
