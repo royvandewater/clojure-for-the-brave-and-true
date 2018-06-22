@@ -20,6 +20,7 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
     - checkout
+    - run: exit 1
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "chapter-8/exercise-1/project.clj" }}
